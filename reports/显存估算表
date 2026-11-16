@@ -1,0 +1,9 @@
+权重显存 = 参数量 P × 每参数字节数
+  FP16/BF16 = 2 B    FP8 = 1 B    INT8 = 1 B    INT4 = 0.5 B
+
+KV cache（每 token）= 2 × 层数 L × KV头数 n_kv × head_dim × 字节数
+KV cache 总量 = 每 token 占用 × 序列长度 × batch
+
+推理总显存 ≈ 权重 + KV cache + 临时激活(2–4 GB) + 框架开销(1–2 GB)
+
+可装卡数判断：总显存 ≤ 单卡显存 × 卡数 × 0.9（留 10% 余量）
